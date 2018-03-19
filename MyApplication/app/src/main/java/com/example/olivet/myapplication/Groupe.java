@@ -8,12 +8,14 @@ public class Groupe {
     private int id_groupe;
     private String nom_projet;
     private String lycee;
+    private String salle;
     private String image;
 
-    Groupe(int id, String nom_projet, String lycee, String image){
+    Groupe(int id, String nom_projet, String lycee, String salle, String image){
         this.id_groupe=id;
         this.nom_projet=nom_projet;
         this.lycee=lycee;
+        this.salle=salle;
         this.image=image;
 
     }
@@ -31,6 +33,9 @@ public class Groupe {
         return lycee;
     }
 
+    public String getSalle() {
+        return salle;
+    }
 
     public String getImage() {
         return image;
@@ -46,6 +51,10 @@ public class Groupe {
 
     public void setLycee(String lycee) {
         this.lycee = lycee;
+    }
+
+    public void setSalle(String salle) {
+        this.salle = salle;
     }
 
     public void setImage(String image) {

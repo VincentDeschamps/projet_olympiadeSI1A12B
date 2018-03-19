@@ -96,6 +96,7 @@ public class projet_desc extends Activity {
                                 i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
                                 i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
                                 i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                                i.putExtra("numSalle", getIntent().getExtras().getStringArrayList("numSalle"));
                                 i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
                                 finish();
                                 startActivity(i);
@@ -138,6 +139,7 @@ public class projet_desc extends Activity {
                 i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
                 i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
                 i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                i.putExtra("numSalle", getIntent().getExtras().getStringArrayList("numSalle"));
                 i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
                 startActivity(i);
             }
@@ -165,10 +167,10 @@ public class projet_desc extends Activity {
         String[] from = new String[] {"col1", "col2"};
 
 // ...pour les placer dans les TextView définis dans "row_item.xml"
-        int[] to = new int[] { R.id.textViewCol1, R.id.textViewCol2};
+        int[] to = new int[] { R.id.textViewProjCol1, R.id.textViewProjCol2};
 
 // création de l'objet SimpleCursorAdapter...
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_item, matrixCursor, from, to, 0){
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_item_note_projet, matrixCursor, from, to, 0){
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public View getView(int position, View convertView, ViewGroup parent){
@@ -183,7 +185,6 @@ public class projet_desc extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                       @Override
                                       public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                          TextView tv = view.findViewById(R.id.textViewCol1);
                                           switch(i) {
                                               case 0:
                                                   onClickOri(); break;
@@ -234,6 +235,7 @@ public class projet_desc extends Activity {
         i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
         i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
         i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+        i.putExtra("numSalle", getIntent().getExtras().getStringArrayList("numSalle"));
         i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
         finish();
         startActivity(i);

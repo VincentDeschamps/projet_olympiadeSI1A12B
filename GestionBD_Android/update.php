@@ -1,10 +1,9 @@
 <?php
   include("PDOConnection.php");
 
-  $data=json_decode($_POST['data']);
+  $data=$_POST['data'];
 
-  function insertion($data)
-{
+  $data_decode=json_decode($data);
+
   
-}
 ?>

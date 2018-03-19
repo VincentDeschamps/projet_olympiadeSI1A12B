@@ -120,7 +120,7 @@ public class Recuperation_Envoi extends Activity{
                 JSONArray groupedonnees=(JSONArray) jObjResult.get("Groupe");
                 for(int i=0;i<groupedonnees.length();i++){
                     JSONObject groupeD=groupedonnees.getJSONObject(i);
-                    Groupe groupe=new Groupe(groupeD.getInt("NumGroupe"),groupeD.getString("NomProj"),groupeD.getString("Lycee"),groupeD.getString("image_Projet"));
+                    Groupe groupe=new Groupe(groupeD.getInt("NumGroupe"),groupeD.getString("NomProj"),groupeD.getString("Lycee"),groupeD.getString("numSalle"),groupeD.getString("image_Projet"));
                     groupeManager.addGroupe(groupe);
                 }
                 groupeManager.close();
@@ -173,12 +173,15 @@ public class Recuperation_Envoi extends Activity{
                 ArrayList<String> heureD = new ArrayList<String>();
                 ArrayList<String> heureF = new ArrayList<String>();
                 ArrayList<Integer> numGrp = new ArrayList<Integer>();
+                ArrayList<String> numSalles = new ArrayList<String>();
+
                 while (juges.moveToNext()) {
                     if (juges.getString(juges.getColumnIndex(KEY_NUMJURY)).equals(id+"")){
                         nomProjet.add(juges.getString(juges.getColumnIndex("NomProj")));
                         heureD.add(juges.getString(juges.getColumnIndex("hDeb")));
                         heureF.add(juges.getString(juges.getColumnIndex("hFin")));
                         numGrp.add(juges.getInt(juges.getColumnIndex("NumGroupe")));
+                        numSalles.add(juges.getString(juges.getColumnIndex("numSalle")));
                     }
                 }
                 juges.close();
@@ -187,6 +190,7 @@ public class Recuperation_Envoi extends Activity{
                 i.putExtra("heureD", heureD);
                 i.putExtra("heureF", heureF);
                 i.putExtra("NumGroupe", numGrp);
+                i.putExtra("numSalle", numSalles);
 
                 DonneManager donMan = new DonneManager(getApplicationContext());
                 donMan.open();

@@ -1,4 +1,9 @@
 <?php
+// require '../Classe/Jury.php';
+// require '../Classe/Groupe.php';
+// require '../Classe/Eleve.php';
+// require '../Classe/Professeur.php';
+// require '../Classe/Personne.php';
 
 function getCSVforEleve($connexion,$filename)
 {
@@ -7,26 +12,30 @@ function getCSVforEleve($connexion,$filename)
     $tabE = array();
     $tabP = array();
     $id = getMaxIDPersonne($connexion)+1;
-    while(($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+    if($handle)
     {
-        $Nom = $data[0];
-        $Prenom = $data[1];
-        $Filiere = $data[2];
-        $NumGroupe = $data[3];
-
-        $p = new Personne($id,$Nom,$Prenom);
-        $e = new Eleve($id,$Filiere,$NumGroupe);
-
-        if (!testPInListe($tabP,$p->getiD())) {
-            array_push($tabP,$p);
-            array_push($tabE,$e);
-            $id++;
+        while(($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+        {
+            $Nom = $data[0];
+            $Prenom = $data[1];
+            $Filiere = $data[2];
+            $NumGroupe = $data[3];
+    
+            $p = new Personne($id,$Nom,$Prenom);
+            $e = new Eleve($id,$Filiere,$NumGroupe);
+    
+            if (!testPInListe($tabP,$p->getiD())) {
+                array_push($tabP,$p);
+                array_push($tabE,$e);
+                $id++;
+            }
         }
+    
+        insertPersonne($connexion,$tabP);
+        insertEleve($connexion,$tabE);
+        fclose($handle);
     }
-
-    insertPersonne($connexion,$tabP);
-    insertEleve($connexion,$tabE);
-    fclose($handle);
+    echo $handle;
 }
 
 function testPInListe($Liste,$id)
@@ -107,24 +116,33 @@ function testPInListeG($Liste,$id)
 
 function getCSVforJury($connexion,$filename)
 {
-    $handle = fopen($filename,"r");
-    $tabJury = array();
-    $id = getMaxIDJURY($connexion)+1;
-    while(($data = fgetcsv($handle, 1000, ",")) !== FALSE)
-    {
-        $Login = $data[0];
-        $Mdp = $data[1];
-
-        $g = new Jury($id,$Login,$Mdp);
-
-        if (!testPInListeJ($tabJury,$g->getNumJury())) {
-            array_push($tabJury,$g);
-            $id++;
+    try{
+        $handle = fopen($filename,"r");
+        $tabJury = array();
+        $id = getMaxIDJURY($connexion)+1;
+        if($handle)
+        {
+            while(($data = fgetcsv($handle, 1000, ",")) !== FALSE)
+            {
+                $Login = $data[0];
+                $Mdp = $data[1];
+        
+                $g = new Jury($id,$Login,$Mdp);
+        
+                if (!testPInListeJ($tabJury,$g->getNumJury())) {
+                    array_push($tabJury,$g);
+                    $id++;
+                }
+            }
+        
+            insertJury($connexion,$tabJury);
+            fclose($handle);
         }
     }
-
-    insertJury($connexion,$tabJury);
-    fclose($handle);
+    catch(Exception $e)
+    {
+        echo $e->getMessage();
+    }
 }
 
 function testPInListeJ($Liste,$id)

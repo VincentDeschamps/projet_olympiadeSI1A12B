@@ -61,12 +61,14 @@ public class Page_connexion extends Activity {
                 ArrayList<String> heureD = new ArrayList<String>();
                 ArrayList<String> heureF = new ArrayList<String>();
                 ArrayList<Integer> numGrp = new ArrayList<Integer>();
+                ArrayList<String> numSalles = new ArrayList<String>();
                 while (juges.moveToNext()) {
                     if (juges.getString(juges.getColumnIndex(KEY_NUMJURY)).equals(id+"")){
                         nomProjet.add(juges.getString(juges.getColumnIndex("NomProj")));
                         heureD.add(juges.getString(juges.getColumnIndex("hDeb")));
                         heureF.add(juges.getString(juges.getColumnIndex("hFin")));
                         numGrp.add(juges.getInt(juges.getColumnIndex("NumGroupe")));
+                        numSalles.add(juges.getString(juges.getColumnIndex("numSalle")));
                     }
                 }
                 juges.close();
@@ -75,6 +77,7 @@ public class Page_connexion extends Activity {
                 i.putExtra("heureD", heureD);
                 i.putExtra("heureF", heureF);
                 i.putExtra("NumGroupe", numGrp);
+                i.putExtra("numSalle", numSalles);
 /*
                 DonneManager donMan = new DonneManager(view.getContext());
                 donMan.open();

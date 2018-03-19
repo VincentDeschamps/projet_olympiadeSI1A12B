@@ -85,7 +85,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       // if(testNote($stmt2,$pluridisciplinarite,"pluriDisciplinarite"))
       // {
         $stmt->bindParam(1,$pluridisciplinarite);
-        $stmt->bindValue(2,3);
+        $stmt->bindValue(2,4);
         $stmt->execute();
       // }
     }
@@ -102,7 +102,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       // if(testNote($stmt2,$maitrise,"MaitriseScientifique"))
       // {
         $stmt->bindParam(1,$maitrise);
-        $stmt->bindValue(2,3);
+        $stmt->bindValue(2,5);
         $stmt->execute();
       // }
     }
@@ -119,7 +119,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       // if(testNote($stmt2,$dev_dur,"Communication"))
       // {
         $stmt->bindParam(1,$dev_dur);
-        $stmt->bindValue(2,3);
+        $stmt->bindValue(2,6);
         $stmt->execute();
       // }
     }
@@ -131,7 +131,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
 
     if($moyenne != "none"){
       $note = getNote($connexion,$moyenne);
-      if($note["Prototype"] > 0)
+      if(($note["Prototype"] > 0) and ($note["Originalite"] > 0) and ($note["DemarcheSI"] > 0) and ($note["pluriDisciplinarite"] > 0) and ($note["devDurable"] > 0) and ($note["Maitrise"]>0))
       {
         $stmt->bindParam(1,$moyenne);
         $stmt->bindValue(2,7);
@@ -152,15 +152,14 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
 insertion($database, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne);
 header('Location: resultats_admin.php');
 
-// function testNote($statement,$note,$categorie){
-//   return true;
-  // while($row = $statement->fetch())
-  // {
-  //   if($row[$categorie] == $note)
-  //   {
-  //     return true;
-  //   }
-  // }
-  // return false;
-// }
+function testNote($statement,$note,$categorie){
+  while($row = $statement->fetch())
+  {
+    if($row[$categorie] > 0)
+    {
+      return true;
+    }
+  }
+  return false;
+}
 ?>

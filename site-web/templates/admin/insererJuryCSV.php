@@ -13,9 +13,8 @@ if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
 <div style="display:flex">
-  <?php include 'menu_admin.php';
-        include '../../../BD/Interactions/InteractionsBD.php';
-  ?>
+  <?php include 'menu_admin.php'; ?>
+
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
     <div class="collapse navbar-collapse" id="navbar">
@@ -25,7 +24,7 @@ if(!isset($_SESSION['loginOK'])){
             Élèves
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="InsererEleveCSV.php">Import CSV</a>
             <a class="dropdown-item" href="InsererEleve.php">Créer</a>
           </div>
         </li>
@@ -35,8 +34,8 @@ if(!isset($_SESSION['loginOK'])){
             Professeurs
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="#">Créer</a>
+            <a class="dropdown-item" href="InsererProfesseurCSV.php">Import CSV</a>
+            <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
           </div>
         </li>
 
@@ -45,8 +44,8 @@ if(!isset($_SESSION['loginOK'])){
             Groupes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="#">Créer</a>
+            <a class="dropdown-item" href="InsererGroupeCSV.php">Import CSV</a>
+            <a class="dropdown-item" href="InsererGroupe.php">Créer</a>
           </div>
         </li>
 
@@ -65,7 +64,7 @@ if(!isset($_SESSION['loginOK'])){
   </nav>
 </div>
 
-<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_jury.php" enctype="multipart/form-data">
+<form name="AjoutJury" method="POST" style="padding-top: 2%" action="insertion_jury_CSV.php" enctype="multipart/form-data">
   <h4>Formulaire d'ajout d'un jury :</h4>
   <table>
     <tr>
@@ -73,8 +72,8 @@ if(!isset($_SESSION['loginOK'])){
         <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Fichier CSV</label>
       </td>
       <td>
-        <input id="filename" type="text" name="file" required></input>
-        <input id="path" type="hidden" name="path"/>
+        <!-- <input type="hidden"> -->
+        <input id="filename" type="file" name="file" required></input>
       </td>
     </tr>
     </table>

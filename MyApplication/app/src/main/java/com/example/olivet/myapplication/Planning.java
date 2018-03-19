@@ -68,6 +68,9 @@ public class Planning extends Activity {
                         {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                MainActivity.mainActivity.finish();
+                                Intent intent = new Intent(Planning.this, MainActivity.class);
+                                startActivity(intent);
                                 finish();
                             }
 
@@ -86,7 +89,7 @@ public class Planning extends Activity {
 
         // Définition des colonnes
 // NB : SimpleCursorAdapter a besoin obligatoirement d'un ID nommé "_id"
-        String[] columns = new String[] { "_id", "col1", "col2" };
+        String[] columns = new String[] { "_id", "col1", "col2", "col3" };
 
 // Définition des données du tableau
 // les lignes ci-dessous ont pour seul but de simuler
@@ -96,33 +99,36 @@ public class Planning extends Activity {
         MatrixCursor matrixCursor= new MatrixCursor(columns);
         startManagingCursor(matrixCursor);
         int k = 1;
-        matrixCursor.addRow(new Object[] { k,"Nom évenement","Horaire" });
+        matrixCursor.addRow(new Object[] { k,"Nom évenement","Horaire", "Salle" });
         k += 1;
         for (int i = 0; i < getIntent().getExtras().getStringArrayList("nomProjet").size(); i++){
             if (i == 0){
-                //System.out.println(getIntent().getExtras().getStringArrayList("heureD").get(0));
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(0),
                         getIntent().getExtras().getStringArrayList("heureD").get(0).substring(0,5)+" - "
-                        + getIntent().getExtras().getStringArrayList("heureF").get(0).substring(0,5) });
+                        + getIntent().getExtras().getStringArrayList("heureF").get(0).substring(0,5),
+                        getIntent().getExtras().getStringArrayList("numSalle").get(0) });
                 k += 1;
             }
             else if (getIntent().getExtras().getStringArrayList("heureF").get(i-1).equals(getIntent().getExtras().getStringArrayList("heureD").get(i))){
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
                         getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5),
+                        getIntent().getExtras().getStringArrayList("numSalle").get(i) });
                 k += 1;
             }
             else {
                 matrixCursor.addRow(new Object[] { k,"Pause",
                         getIntent().getExtras().getStringArrayList("heureF").get(i-1).substring(0,5)+" - "
-                                +getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)});
+                                +getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5),
+                        ""});
                 k += 1;
                 matrixCursor.addRow(new Object[] { k,
                         getIntent().getExtras().getStringArrayList("nomProjet").get(i),
                         getIntent().getExtras().getStringArrayList("heureD").get(i).substring(0,5)+" - "
-                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5) });
+                                + getIntent().getExtras().getStringArrayList("heureF").get(i).substring(0,5),
+                        getIntent().getExtras().getStringArrayList("numSalle").get(i) });
                 k += 1;
             }
         }
@@ -135,10 +141,10 @@ public class Planning extends Activity {
         //matrixCursor.addRow(new Object[] { 8,"Projet Jalon","11h30 - 11h50" });
 
 // on prendra les données des colonnes 1 et 2...
-        String[] from = new String[] {"col1", "col2"};
+        String[] from = new String[] {"col1", "col2", "col3"};
 
 // ...pour les placer dans les TextView définis dans "row_item.xml"
-        int[] to = new int[] { R.id.textViewCol1, R.id.textViewCol2};
+        int[] to = new int[] { R.id.textViewCol1, R.id.textViewCol2, R.id.textViewCol3};
 
 // création de l'objet SimpleCursorAdapter...
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.row_item, matrixCursor, from, to, 0){
@@ -165,14 +171,11 @@ public class Planning extends Activity {
                                 if (sommeListeSansPre(listeNote) == 0) {
                                     // Set a background color for ListView regular row/item
                                     couleur = "#dddf1d";//Jaune
-                                    System.out.println("Jaune: " + sommeListeSansPre(listeNote));
                                 }
                                 if (listeNote.get(fin) == null) {
                                     // Set the background color for alternate row/item
                                     couleur = "#df1d1d";//Rouge
-                                    System.out.println("Rouge 1: " + listeNote.get(fin));
                                 }
-                                System.out.println("Rouge 1: " + listeNote.get(fin));
                                 fin += 1;
                                 test = false;
                             }
@@ -231,6 +234,7 @@ public class Planning extends Activity {
                     intent.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
                     intent.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
                     intent.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                    intent.putExtra("numSalle", getIntent().getExtras().getStringArrayList("numSalle"));
                     intent.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
                     startActivity(intent);
                 }
@@ -249,6 +253,9 @@ public class Planning extends Activity {
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.mainActivity.finish();
+                        Intent intent = new Intent(Planning.this, MainActivity.class);
+                        startActivity(intent);
                         finish();
                     }
 

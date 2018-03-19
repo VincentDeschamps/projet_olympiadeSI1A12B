@@ -19,10 +19,12 @@ import java.io.File;
 public class MainActivity extends Activity {
     Button buttonConsulter;
     Button buttonEnvoie;
+    public static Activity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainActivity = this;
         setContentView(R.layout.activity_main);
         buttonEnvoie = (Button)findViewById(R.id.buttonEnvoie);
         buttonConsulter = (Button)findViewById(R.id.buttonConsulter);

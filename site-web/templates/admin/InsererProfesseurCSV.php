@@ -64,42 +64,20 @@ if(!isset($_SESSION['loginOK'])){
   </nav>
 </div>
 
-<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_groupe.php">
-  <h4>Formulaire d'ajout d'un groupe :</h4>
+<form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_prof_CSV.php" enctype="multipart/form-data">
+  <h4>Formulaire d'ajout d'un professeur :</h4>
   <table>
     <tr>
       <td style="width: 300px">
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Nom du projet :</label>
+        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Fichier CSV</label>
       </td>
       <td>
-        <input type="text" name="Name" required></input>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Lycée :</label>
-      </td>
-      <td>
-        <input type="input" name="lycee" required></input>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Numéro de salle :</label>
-      </td>
-      <td>
-        <input type="input" name="num" required></input>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <label style="padding-left: 2% ; padding-right: 2% ; padding-top: 2%">Chemin de l'image du projet :</label>
-      </td>
-      <td>
-        <input type="input" name="img" required></input>
+        <!-- <input type="hidden"> -->
+        <input id="filename" type="file" name="file" required></input>
       </td>
     </tr>
     </table>
-    <input type="submit" value="Ajouter Groupe">
+    <input type="submit" value="Ajouter Professeur">
 </form>
+
 </body>

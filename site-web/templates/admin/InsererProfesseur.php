@@ -13,9 +13,8 @@ if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
 <div style="display:flex">
-  <?php include 'menu_admin.php';
-        include '../../../BD/Interactions/InteractionsBD.php';
-  ?>
+  <?php include 'menu_admin.php'; ?>
+
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
     <div class="collapse navbar-collapse" id="navbar">
@@ -25,7 +24,7 @@ if(!isset($_SESSION['loginOK'])){
             Élèves
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="InsererEleveCSV.php">Import CSV</a>
             <a class="dropdown-item" href="InsererEleve.php">Créer</a>
           </div>
         </li>
@@ -35,8 +34,8 @@ if(!isset($_SESSION['loginOK'])){
             Professeurs
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="insererProfesseur.php">Créer</a>
+            <a class="dropdown-item" href="InsererProfesseurCSV.php">Import CSV</a>
+            <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
           </div>
         </li>
 
@@ -45,7 +44,7 @@ if(!isset($_SESSION['loginOK'])){
             Groupes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="InsererGroupeCSV.php">Import CSV</a>
             <a class="dropdown-item" href="InsererGroupe.php">Créer</a>
           </div>
         </li>
@@ -55,7 +54,7 @@ if(!isset($_SESSION['loginOK'])){
             Jurys
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="insererJuryCSV.php">Import CSV</a>
             <a class="dropdown-item" href="insererJury.php">Créer</a>
           </div>
         </li>

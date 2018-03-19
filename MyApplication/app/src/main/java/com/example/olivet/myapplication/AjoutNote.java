@@ -192,6 +192,7 @@ public class AjoutNote extends Activity {
                 i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
                 i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
                 i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+                i.putExtra("numSalle", getIntent().getExtras().getStringArrayList("numSalle"));
                 i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
                 finish();
                 startActivity(i);
@@ -229,6 +230,7 @@ public class AjoutNote extends Activity {
         i.putExtra("nomProjet", getIntent().getExtras().getStringArrayList("nomProjet"));
         i.putExtra("heureD", getIntent().getExtras().getStringArrayList("heureD"));
         i.putExtra("heureF", getIntent().getExtras().getStringArrayList("heureF"));
+        i.putExtra("numSalle", getIntent().getExtras().getStringArrayList("numSalle"));
         i.putExtra("NumGroupe", getIntent().getExtras().getIntegerArrayList("NumGroupe"));
         finish();
         startActivity(i);

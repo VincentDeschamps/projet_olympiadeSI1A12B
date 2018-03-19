@@ -11,11 +11,11 @@
     try{
         $db = connect_database();
         $path = $_FILES["file"]["tmp_name"];
-        echo getCSVforJury($db,$path);
+        echo getCSVforGroupe($db,$path);
     }
     catch(Exception $e){
         echo $e->getMessage();
     }
 
-    header('Location:insererJury.php');
+    header('Location:InsererGroupe.php');
 ?>

@@ -24,7 +24,7 @@ if(!isset($_SESSION['loginOK'])){
             Élèves
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="InsererEleveCSV.php">Import CSV</a>
             <a class="dropdown-item" href="InsererEleve.php">Créer</a>
           </div>
         </li>
@@ -34,7 +34,7 @@ if(!isset($_SESSION['loginOK'])){
             Professeurs
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
+            <a class="dropdown-item" href="InsererProfesseurCSV.php">Import CSV</a>
             <a class="dropdown-item" href="InsererProfesseur.php">Créer</a>
           </div>
         </li>
@@ -44,8 +44,8 @@ if(!isset($_SESSION['loginOK'])){
             Groupes
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Import CSV</a>
-            <a class="dropdown-item" href="#">Créer</a>
+            <a class="dropdown-item" href="InsererGroupeCSV.php">Import CSV</a>
+            <a class="dropdown-item" href="InsererGroupe.php">Créer</a>
           </div>
         </li>
 

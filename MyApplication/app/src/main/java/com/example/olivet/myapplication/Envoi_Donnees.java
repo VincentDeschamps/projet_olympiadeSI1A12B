@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -34,7 +35,7 @@ public class Envoi_Donnees extends Activity {
         setContentView(R.layout.envoi_donnees);
 
         textProgress = (TextView) findViewById(R.id.textProgress);
-        new TaskEnvoi();
+        new TaskEnvoi().execute();
 
     }
 
@@ -50,37 +51,59 @@ public class Envoi_Donnees extends Activity {
             NoteManager noteManager=new NoteManager(getApplicationContext());
             DonneManager donneManager=new DonneManager(getApplicationContext());
 
-            HashMap<String, ArrayList<HashMap<String, Object>>> dico_des_donnees=new HashMap<>();
+            JSONObject dico_des_donnees= new JSONObject();
+            noteManager.open();
             Cursor cursornote=noteManager.getNotes();
-            ArrayList<HashMap<String,Object>> listeNotes=new ArrayList<>();
+            JSONArray listeNotes=new JSONArray();
             while(cursornote.moveToNext()){
-                HashMap<String, Object> note=new HashMap<>();
-                note.put("idNote",cursornote.getColumnIndex("idNote"));
-                note.put("prototype",cursornote.getColumnIndex("prototype"));
-                note.put("originalite",cursornote.getColumnIndex("originalite"));
-                note.put("demarcheSI",cursornote.getColumnIndex("demarcheSI"));
-                note.put("pluriDisciplinarite",cursornote.getColumnIndex("pluriDisciplinarite"));
-                note.put("maitrise",cursornote.getColumnIndex("maitrise"));
-                note.put("devDurable",cursornote.getColumnIndex("devDurable"));
-                listeNotes.add(note);
+                JSONObject note=new JSONObject();
+                try {
+                    note.put("idNote",cursornote.getInt(cursornote.getColumnIndex("idNote")));
+                    note.put("prototype",cursornote.getInt(cursornote.getColumnIndex("prototype")));
+                    note.put("originalite",cursornote.getInt(cursornote.getColumnIndex("originalite")));
+                    note.put("demarcheSI",cursornote.getInt(cursornote.getColumnIndex("demarcheSI")));
+                    note.put("pluriDisciplinarite",cursornote.getInt(cursornote.getColumnIndex("pluriDisciplinarite")));
+                    note.put("maitrise",cursornote.getInt(cursornote.getColumnIndex("maitrise")));
+                    note.put("devDurable",cursornote.getInt(cursornote.getColumnIndex("devDurable")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                listeNotes.put(note);
             }
-            dico_des_donnees.put("Note",listeNotes);
+            try {
+                dico_des_donnees.put("Note",listeNotes);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            cursornote.close();
 
+            donneManager.open();
             Cursor cursordonne=donneManager.getDonnes();
-            ArrayList<HashMap<String,Object>> listeDonne=new ArrayList<>();
+            JSONArray listeDonne=new JSONArray();
             while(cursordonne.moveToNext()){
-                HashMap<String, Object> donne=new HashMap<>();
-                donne.put("NumJury",cursordonne.getColumnIndex("NumJury"));
-                donne.put("NumGroupe",cursordonne.getColumnIndex("NumGroupe"));
-                donne.put("idNote",cursordonne.getColumnIndex("idNote"));
-                listeDonne.add(donne);
+                JSONObject donne=new JSONObject();
+                try {
+                    donne.put("NumJury",cursornote.getInt(cursordonne.getColumnIndex("NumJury")));
+                    donne.put("NumGroupe",cursornote.getInt(cursordonne.getColumnIndex("NumGroupe")));
+                    donne.put("idNote",cursornote.getInt(cursordonne.getColumnIndex("idNote")));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                listeDonne.put(donne);
             }
-            dico_des_donnees.put("Donne",listeDonne);
+            try {
+                dico_des_donnees.put("Donne",listeDonne);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            cursordonne.close();
 
             JSONObject jObjResult;
-
+            HashMap<String,String> data=new HashMap<String,String>();
+            data.put("data",dico_des_donnees.toString());
+            System.out.println(dico_des_donnees.toString());
             try {
-                jObjResult = m_ServiceAccess.convertJSONString2Obj(m_ServiceAccess.getJSONStringWithParam_POST2(Donnees_BD.ENVOI_URL, dico_des_donnees));
+                jObjResult = m_ServiceAccess.convertJSONString2Obj(m_ServiceAccess.getJSONStringWithParam_POST(Donnees_BD.ENVOI_URL, data));
                 return jObjResult.getInt("resultat");
             } catch (Exception e){
                 return Donnees_BD.RESULT_ERROR;
