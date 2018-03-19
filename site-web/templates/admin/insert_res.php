@@ -31,12 +31,12 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt2->bindParam(1,$originalite);
       $stmt2->execute();
 
-      if(testNote($stmt2,$originalite,"originalite"))
-      {
+      // if(testNote($stmt2,$originalite,"originalite"))
+      // {
         $stmt->bindParam(1,$originalite);
         $stmt->bindValue(2,1);
         $stmt->execute();
-      }
+      // }
     }
     else{
       $stmt->bindValue(1,NULL);
@@ -48,12 +48,12 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
       $stmt2->bindParam(1,$prototype);
       $stmt2->execute();
 
-      if(testNote($stmt2,$prototype,"prototype"))
-      {
+      // if(testNote($stmt2,$prototype,"prototype"))
+      // {
       $stmt->bindParam(1,$prototype);
       $stmt->bindValue(2,2);
       $stmt->execute();
-      }
+      // }
     }
     else{
       $stmt->bindValue(1,NULL);
@@ -64,13 +64,13 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($demarche_si != "none"){
       $stmt2->bindParam(1,$demarche_si);
       $stmt2->execute();
-      
-      if(testNote($stmt2,$demarche_si,"DemarcheScientifique"))
-      {
+
+      // if(testNote($stmt2,$demarche_si,"DemarcheScientifique"))
+      // {
         $stmt->bindParam(1,$demarche_si);
         $stmt->bindValue(2,3);
         $stmt->execute();
-      }
+      // }
     }
     else{
       $stmt->bindValue(1,NULL);
@@ -81,13 +81,13 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($pluridisciplinarite != "none"){
       $stmt2->bindParam(1,$pluridisciplinarite);
       $stmt2->execute();
-      
-      if(testNote($stmt2,$pluridisciplinarite,"pluriDisciplinarite"))
-      {
+
+      // if(testNote($stmt2,$pluridisciplinarite,"pluriDisciplinarite"))
+      // {
         $stmt->bindParam(1,$pluridisciplinarite);
         $stmt->bindValue(2,3);
         $stmt->execute();
-      }
+      // }
     }
     else{
       $stmt->bindValue(1,NULL);
@@ -98,13 +98,13 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($maitrise != "none"){
       $stmt2->bindParam(1,$maitrise);
       $stmt2->execute();
-      
-      if(testNote($stmt2,$maitrise,"MaitriseScientifique"))
-      {
+
+      // if(testNote($stmt2,$maitrise,"MaitriseScientifique"))
+      // {
         $stmt->bindParam(1,$maitrise);
         $stmt->bindValue(2,3);
         $stmt->execute();
-      }
+      // }
     }
     else{
       $stmt->bindValue(1,NULL);
@@ -115,13 +115,13 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
     if($dev_dur != "none"){
       $stmt2->bindParam(1,$dev_dur);
       $stmt2->execute();
-      
-      if(testNote($stmt2,$dev_dur,"Communication"))
-      {
+
+      // if(testNote($stmt2,$dev_dur,"Communication"))
+      // {
         $stmt->bindParam(1,$dev_dur);
         $stmt->bindValue(2,3);
         $stmt->execute();
-      }
+      // }
     }
     else{
       $stmt->bindValue(1,NULL);
@@ -131,7 +131,7 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
 
     if($moyenne != "none"){
       $note = getNote($connexion,$moyenne);
-      if(note["Prototype"] > 0)
+      if($note["Prototype"] > 0)
       {
         $stmt->bindParam(1,$moyenne);
         $stmt->bindValue(2,7);
@@ -152,14 +152,15 @@ function insertion($connexion, $originalite, $prototype, $demarche_si, $pluridis
 insertion($database, $originalite, $prototype, $demarche_si, $pluridisciplinarite, $maitrise, $dev_dur, $moyenne);
 header('Location: resultats_admin.php');
 
-function testNote($statement,$note,$categorie){
-  while($row = $statement->fetch())
-  {
-    if($row[$categorie] == $note)
-    {
-      return true;
-    }
-  }
-  return false;
-}
+// function testNote($statement,$note,$categorie){
+//   return true;
+  // while($row = $statement->fetch())
+  // {
+  //   if($row[$categorie] == $note)
+  //   {
+  //     return true;
+  //   }
+  // }
+  // return false;
+// }
 ?>
