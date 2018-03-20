@@ -16,25 +16,6 @@ if(!isset($_SESSION['loginOK'])){
 
 <h1 class="vignets text-center">Bienvenue, administrateur</h1>
 
-<?php
-
-  include '../Interactions/InteractionsBD.php';
-  include '../Interactions/Connexion.php';
-
-  $db = connect_database();
-
-  $statement = $de->prepare("SELECT * from OLYMPIADES");
-  $statement->execute();
-
-  while($row = $statement->fetch()){
-    $numEdition = $row["numEdition"];
-    $LogOlympiades = $row["LogOlympiades"];
-    $LogoSponsor = $row["LogoSponsor"];
-    $LogoUPSTI = $row["LogoUPSTI"];
-    $LogoIUT = $row["LogoIUT"];
-  }
-
- ?>
 
 </body>
 </html>

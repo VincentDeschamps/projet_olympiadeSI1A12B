@@ -50,7 +50,7 @@
           <button class="btn btn-light" type="reset">Effacer</button>
         </div>
       </form>
-      
+
       <div id="err"></div>
     </div>
   </div>

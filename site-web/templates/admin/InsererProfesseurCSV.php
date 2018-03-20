@@ -14,6 +14,7 @@ if(!isset($_SESSION['loginOK'])){
 }?>
 <div style="display:flex">
   <?php include 'menu_admin.php'; ?>
+  
 
   <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="margin-left: 11%">
 
