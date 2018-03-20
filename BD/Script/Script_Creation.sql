@@ -18,8 +18,7 @@ create table GROUPE(
     Lycee varchar(100),
     numSalle int,
     image_Projet varchar(100),
-    PRIMARY key(NumGroupe),
-    CONSTRAINT Salle UNIQUE(numSalle)
+    PRIMARY key(NumGroupe)
 );
 
 create table PROFESSEUR(

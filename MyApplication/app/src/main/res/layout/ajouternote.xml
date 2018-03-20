@@ -22,9 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginStart="256dp"
-        android:layout_marginTop="152dp"
-        android:text="Prototype"
+        android:layout_marginTop="104dp"
         android:onClick="onClickProto"
+        android:text="Prototype"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,9 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="256dp"
-        android:layout_marginTop="104dp"
-        android:text="Originalité"
+        android:layout_marginTop="152dp"
         android:onClick="onClickOri"
+        android:text="Originalité"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

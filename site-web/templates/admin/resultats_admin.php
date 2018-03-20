@@ -27,20 +27,23 @@
         <thead class="thead-dark">
           <tr>
             <th>Équipe</th>
+            <th>Nom Projet</th>
+            <th>Lycée</th>
             <th>Originalité</th>
             <th>Prototype</th>
             <th>Démarche SI</th>
             <th>Pluridisciplinarité</th>
             <th>Maîtrise</th>
-            <th>Développement Durable</th>
+            <th>Communication</th>
             <th>Moyenne</th>
           </tr>
         </thead>
         <?php
         $all_grp = array();
         $all_recompense = array();
+        $all_lycee = array();
         try{
-          $stmt = $db->prepare("SELECT NumGroupe FROM GROUPE where NumGroupe != 0");
+          $stmt = $db->prepare("SELECT NumGroupe,Lycee,NomProjet FROM GROUPE");
           $stmt->execute();
           $stmt2 = $db->prepare("SELECT idGroupe, idRecompense FROM RECOMPENSE");
           $stmt2->execute();
@@ -62,6 +65,8 @@
             $liste = getNote($db,$row['NumGroupe']);
             echo "<tr>";
             echo "<td>".$row['NumGroupe']."</td>";
+            echo "<td>".$row['NomProjet']."</td>";
+            echo "<td>".$row['Lycee']."</td>";
 
             //echo $liste['Originalite'];
             if($liste['Originalite']==-1){
@@ -207,6 +212,14 @@
       <label style="padding-left: 1%">Attribution actuelle des prix</label>
     </div>
 
+      <!-- <div id="rules" style:"margin:0 auto">
+        <article>
+              <h3>Règles de notations: </h3>
+              <p>Une seule récompense par groupe.</p><br>
+              <p>Deux récompenses par Lycée.</p>
+        </article>
+      </div> -->
+
     <div style="padding-left: 5% ; padding-right: 5% ; padding-top: 5%">
       <h3>Attribution des prix :</h3>
       <form method="post" action="insert_res.php">
@@ -286,7 +299,7 @@
                 } ?>
               </select>
             </td>
-            <td>Développement durable</td>
+            <td>Communication</td>
             <td>
               <select name="developpement_durable">
                 <option value="none"></option>

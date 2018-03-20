@@ -41,3 +41,5 @@ insert into RECOMPENSE values (4,NULL,"pluriDisciplinarite");
 insert into RECOMPENSE values (5,NULL,"MaitriseScientifique");
 insert into RECOMPENSE values (6,NULL,"Communication");
 insert into RECOMPENSE values(7,NULL,"moyenne");
+
+insert into OLYMPIADES values(1,null,null,null,null,null,null);

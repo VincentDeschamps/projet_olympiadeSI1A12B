@@ -31,8 +31,8 @@
         android:id="@+id/buttonSupprimer"
         android:layout_width="108dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="308dp"
         android:background="@android:color/holo_red_light"
         android:text="Supprimer"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,8 +42,8 @@
         android:id="@+id/buttonModifier"
         android:layout_width="108dp"
         android:layout_height="69dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="156dp"
         android:background="?android:attr/textColorHint"
         android:text="Modifier"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,23 +52,13 @@
     <ListView
         android:id="@+id/lv"
         android:layout_width="527dp"
-        android:layout_height="334dp"
+        android:layout_height="332dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.832"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ListView>
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="264dp"
-        android:layout_height="257dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="120dp"
-        android:src="@android:drawable/star_big_on"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by schultz on 20/12/17.
  */
@@ -165,27 +167,35 @@ public class AjoutNote extends Activity {
                     if (("None").equals((String) spin.getSelectedItem())) {
                         listeNote.add(null);
                     } else {
-                        listeNote.add(Integer.parseInt((String) spin.getSelectedItem()));
+                        listeNote.add(parseInt((String) spin.getSelectedItem()));
                     }
                 }
                 Page_connexion.listeGrpNote.add(listeNote);
 
-                DonneManager donMan = new DonneManager(view.getContext());
-                donMan.open();
-                Cursor c = donMan.getDonneIdNote(id, idGp);
-                int idNote = -1;
-                if (c.moveToFirst()){
-                    idNote = c.getInt(c.getColumnIndex("idNote"));
-                }
-                Donne donne = new Donne(id, idGp, idNote);
-                donMan.modDonne(donne);
-                donMan.close();
-
                 NoteManager noteMan = new NoteManager(view.getContext());
                 noteMan.open();
+                String idNoteStr = id+""+idGp;
+                Integer idNote = parseInt(idNoteStr);
                 Note note = new Note(idNote, listeNote.get(1), listeNote.get(2), listeNote.get(3), listeNote.get(4), listeNote.get(5), listeNote.get(6));
-                noteMan.modNoteHard(note);
+                Cursor c2 = noteMan.getNotes();
+                int idNote2 = 0;
+                while (c2.moveToNext()){
+                    idNote2 = c2.getInt(c2.getColumnIndex("idNote"));
+                    if(idNote2!=0){
+                        noteMan.modNote(note);
+                    }
+                }
+                if(idNote2!=idNote){
+                    noteMan.addNote(note);
+                }
                 noteMan.close();
+
+                DonneManager donMan = new DonneManager(view.getContext());
+                donMan.open();
+                Donne donne = new Donne(id, idGp, idNote);
+                donMan.addDonne(donne);
+                donMan.close();
+
 
                 Intent i = new Intent(AjoutNote.this,Planning.class);
                 i.putExtra("NumJury", getIntent().getExtras().getInt("NumJury"));

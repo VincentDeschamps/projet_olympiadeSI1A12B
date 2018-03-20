@@ -156,8 +156,8 @@ public class projet_desc extends Activity {
 // utilisez votre "cursor" au lieu du "matrixCursor"
         MatrixCursor matrixCursor= new MatrixCursor(columns);
         startManagingCursor(matrixCursor);
-        matrixCursor.addRow(new Object[] { 1,"Originalité",getIntent().getExtras().getIntegerArrayList("listeNote").get(1)});
-        matrixCursor.addRow(new Object[] { 2,"Prototype",getIntent().getExtras().getIntegerArrayList("listeNote").get(2) });
+        matrixCursor.addRow(new Object[] { 1,"Prototype",getIntent().getExtras().getIntegerArrayList("listeNote").get(1)});
+        matrixCursor.addRow(new Object[] { 2,"Originalité",getIntent().getExtras().getIntegerArrayList("listeNote").get(2) });
         matrixCursor.addRow(new Object[] { 3,"Démarche Scientifique",getIntent().getExtras().getIntegerArrayList("listeNote").get(3) });
         matrixCursor.addRow(new Object[] { 4,"Pluridisciplinarité",getIntent().getExtras().getIntegerArrayList("listeNote").get(4) });
         matrixCursor.addRow(new Object[] { 5,"Maîtrise Scientifique",getIntent().getExtras().getIntegerArrayList("listeNote").get(5) });

@@ -55,6 +55,7 @@ public class NoteManager {
         // Ajout d'un enregistrement dans la table
 
         ContentValues values = new ContentValues();
+        values.put(KEY_ID_NOTE, note.getIdNote());
         values.put(KEY_PROTOTYPE, note.getPrototype());
         values.put(KEY_ORIGINALITE, note.getOriginalite());
         values.put(KEY_DEMARCHESI, note.getDemarcheSI());
@@ -115,7 +116,6 @@ public class NoteManager {
             n.setDevDurable(c.getInt(c.getColumnIndex(KEY_DEVDURABLE)));
             c.close();
         }
-
         return n;
     }
 

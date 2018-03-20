@@ -18,7 +18,7 @@ if(isset($action))
 	$username = $_POST["username"];
 	$pwd = $_POST["password"];
 	// $username='Login';
-	// $pwd='password';
+	// $pwd='MDP';
 
 	if($action==ACTION_LOGIN) //Action login
 	{
@@ -35,7 +35,7 @@ if(isset($action))
 
 				while  ($row = $res->fetch()) {
 
-					array_push($listeGrp, array('NumGroupe'=>$row[2],"NomProj"=>$row[4],"Lycee"=>$row[5],"image_Projet"=>$row[6],"numSalle"=>$row[3]));
+					array_push($listeGrp, array('NumGroupe'=>$row[2],"NomProj"=>$row[4],"Lycee"=>$row[5],"image_Projet"=>$row[6], "numSalle"=>$row[3]));
 
 					array_push($relation, array('NumJury'=>$row[1],'NumGroupe'=>$row[2],'idHeure'=>$row[0]));
 
