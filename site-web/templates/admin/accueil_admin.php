@@ -12,12 +12,6 @@ $_SESSION['connect']=0;
 if(!isset($_SESSION['loginOK'])){
   header('Location: ../protection/connexion.php');
 }?>
-<<<<<<< HEAD
-<?php include 'menu_admin.php'; ?>
-
-<h1 class="vignets text-center">Bienvenue, administrateur</h1>
-
-=======
 <?php
   include '../../../BD/Interactions/Connexion.php';
   $db = connect_database();
