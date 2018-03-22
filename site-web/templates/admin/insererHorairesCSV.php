@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html class="h-100">
+<html>
 <head>
 <link rel="stylesheet" href="../../css/index.css"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 </head>
-<body class="h-100">
+<body>
 <?php session_start();
 $_SESSION['connect']=0;
 if(!isset($_SESSION['loginOK'])){
@@ -72,26 +72,14 @@ if(!isset($_SESSION['loginOK'])){
 <div id="main" class="container-fluid" style="height:50%">
   <div class="row justify-content-between" style="height:150%">
     <div class="col-8">
-      <form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_groupe.php">
-        <h4>Formulaire d'ajout d'un groupe :</h4>
+      <form name="AjoutEleve" method="POST" style="padding-top: 2%" action="insertion_horaires_CSV.php" enctype="multipart/form-data">
+        <h4>Formulaire d'ajout d'un horaire (CSV) :</h4>
         <div class="form-group row">
-          <label for="name" class="col-4">Nom du projet :</label>
-          <input class="col-8" id="name" type="text" name="Name" required></input>
-        </div>
-        <div class="form-group row">
-          <label for="lycee" class="col-4">Lycée :</label>
-          <input class="col-8" id="lycee" type="input" name="lycee" required></input>
-        </div>
-        <div class="form-group row">
-          <label for="num" class="col-4">Nom de salle :</label>
-          <input class="col-8" id="num" type="input" name="num" required></input>
-        </div>
-        <div class="form-group row">
-          <label for="img" class="col-4">Chemin de l'image du projet :</label>
-          <input class="col-8" id="img" type="input" name="img" value="None" required></input>
+          <label for="filename" class="col-4">Fichier CSV</label>
+          <input id="filename" type="file" name="file" required></input>
         </div>
         <div class="text-center">
-          <button class="btn btn-dark" type="submit">Ajouter Groupe</button>
+          <button class="btn btn-dark" type="submit">Ajouter Horaire</button>
         </div>
       </form>
     </div>
@@ -101,59 +89,18 @@ if(!isset($_SESSION['loginOK'])){
       require "../../../BD/Interactions/InteractionsBD.php";
       $db = connect_database();
       try{
-        $maxNumGroupe = getMaxIDGROUPE($db);
-        $grpancien = 0;
-        $stmt2 = $db->prepare("SELECT * FROM ELEVE natural join PERSONNE natural join GROUPE where ID=IDEleve and NumGroupe = ?");
-        $stmt = $db->prepare("SELECT * FROM GROUPE where NumGroupe not in(SELECT NumGroupe FROM ELEVE)");
-        $stmt->execute();
-
-        for ($i=1; $i<=$maxNumGroupe; $i++){
-          $stmt2->bindParam(1, $i);
-          $stmt2->execute();
-          while($row = $stmt2->fetch())
-          {
-            if($row["NumGroupe"] != $grpancien){
-              if($i != 1){
-                echo '</div>';
-              }
-              echo '
-              <div id="grp-'.$row["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
-                <h1>Groupe n°'.$row["NumGroupe"].'</h1>
-                <h2>Projet : '.$row["NomProjet"].'</h2>
-                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
-                  <p>Élève n°'.$row["IDEleve"].'</p>
-                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
-                </div>';
-              }
-              else{
-                echo '
-                <div class="jumbotron text-dark bg-light" style="padding:0.5em">
-                  <p>Élève n°'.$row["IDEleve"].'</p>
-                  <p>Nom : '.$row["Nom"].' '.$row["Prenom"].'</p>
-                </div>
-                ';
-              }
-              $grpancien = $row["NumGroupe"];
-            }
+        $stmt2 = $db->prepare("SELECT * FROM HEURE order by hDeb");
+        $stmt2->execute();
+        echo '<div class="jumbotron text-white bg-dark" style="padding:1em">';
+        while($row = $stmt2->fetch())
+        {
+          echo '
+            <div class="jumbotron text-dark bg-light" style="padding:0.5em">
+              <p>Début : '.$row["hDeb"].'</p>
+              <p>Fin : '.$row["hFin"].'</p>
+            </div>';
           }
-          echo "</div>";
-          while($row2 = $stmt->fetch()){
-            if($i != $maxNumGroupe-1){
-              echo '
-              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
-                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
-                <h2>Projet : '.$row2["NomProjet"].'</h2>
-              </div>';
-            }
-            else{
-              echo '
-              </div>
-              <div id="grp-'.$row2["NumGroupe"].'" class="jumbotron text-white bg-dark" style="padding:1em">
-                <h1>Groupe n°'.$row2["NumGroupe"].'</h1>
-                <h2>Projet : '.$row2["NomProjet"].'</h2>
-              </div>';
-            }
-        }
+        echo '</div>';
       }
       catch(Exception $e)
       {
@@ -164,4 +111,5 @@ if(!isset($_SESSION['loginOK'])){
 
     </div>
   </div>
+
 </body>

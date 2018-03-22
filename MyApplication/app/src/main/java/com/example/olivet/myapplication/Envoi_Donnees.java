@@ -38,6 +38,7 @@ public class Envoi_Donnees extends Activity {
         textProgress = (TextView) findViewById(R.id.textProgress);
         new TaskEnvoi().execute();
 
+
     }
 
     public class TaskEnvoi extends AsyncTask<String,Void,Integer>{

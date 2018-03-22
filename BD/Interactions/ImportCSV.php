@@ -5,10 +5,28 @@
 // require '../Classe/Professeur.php';
 // require '../Classe/Personne.php';
 
+
+/**
+ * Cette fonction traite le fichier en format CSV
+ * passé en paramètres pour ensuite insérer les 
+ * données qu'il contient dans la base de données,
+ * dans le cas présent des élèves.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * @param String $filename Chemin pour accèder au fichier CSV
+ */
 function getCSVforEleve($connexion,$filename)
 {
+    /**
+     * 
+     * @var Pointeur $handle Pointeur vers le fichier à traiter.
+     * @var Array $tabE Liste des élèves à insérer dans la base de données.
+     * @var Array $tabP Liste des Personnes à insérer dans la base de données.
+     * @var Integer $id ID maximum d'une personne dans la base de données
+     */
     $handle = fopen($filename,"r");
-    $tabPersonne = array();
     $tabE = array();
     $tabP = array();
     $id = getMaxIDPersonne($connexion)+1;
@@ -35,14 +53,25 @@ function getCSVforEleve($connexion,$filename)
         insertEleve($connexion,$tabE);
         fclose($handle);
     }
-    echo $handle;
 }
 
+/**
+ * Cette fonction si l'ID passé en paramètre est présent
+ * dans la liste passée, elle aussi, en paramètre.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param Array $Liste Liste contenant des personnes
+ * @param Integer $id ID dont il faut vérifier la présence dans la liste ou non
+ * 
+ * @return Boolean Renvoie si oui ou non l'ID est présent dans la liste de personnes.
+ * 
+ */
 function testPInListe($Liste,$id)
 {
   foreach ($Liste as $p)
   {
-    if ($p->getiD() == $id)
+    if ($p->getiD() === $id)
     {
       return true;
     }
@@ -50,10 +79,28 @@ function testPInListe($Liste,$id)
   return false;
 }
 
+/**
+ * Cette fonction traite le fichier en format CSV
+ * passé en paramètre pour ensuite insérer les 
+ * données qu'il contient dans la base de données,
+ * dans le cas présent des professeurs.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * @param String $filename Chemin pour accèder au fichier CSV
+ */
 function getCSVforProf($connexion,$filename)
 {
+    /**
+     * 
+     * @var Pointeur $handle Pointeur vers le fichier à traiter.
+     * @var Array $tabProf Liste des profeseurs à insérer dans la base de données.
+     * @var Array $tabPers Liste des Personnes à insérer dans la base de données.
+     * @var Integer $id ID maximum d'une personne dans la base de données
+     */
+
     $handle = fopen($filename,"r");
-    $tabPersonne = array();
     $tabPers = array();
     $tabProf = array();
     $id = getMaxIDPersonne($connexion)+1;
@@ -78,8 +125,26 @@ function getCSVforProf($connexion,$filename)
     fclose($handle);
 }
 
+/**
+ * Cette fonction traite le fichier en format CSV
+ * passé en paramètre pour ensuite insérer les 
+ * données qu'il contient dans la base de données,
+ * dans le cas présent des groupes.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * @param String $filename Chemin pour accèder au fichier CSV
+ */
 function getCSVforGroupe($connexion,$filename)
 {
+    /**
+     * 
+     * @var Pointeur $handle Pointeur vers le fichier à traiter.
+     * @var Array $tabGroupe Liste des groupes à insérer dans la base de données.
+     * @var Integer $id ID maximum d'un groupe dans la base de données
+     */
+
     $handle = fopen($filename,"r");
     $tabGroupe = array();
     $id = getMaxIDGROUPE($connexion)+1;
@@ -102,11 +167,23 @@ function getCSVforGroupe($connexion,$filename)
     fclose($handle);
 }
 
+/**
+ * Cette fonction si l'ID passé en paramètre est présent
+ * dans la liste passée, elle aussi, en paramètre.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param Array $Liste Liste contenant des personnes
+ * @param Integer $id ID dont il faut vérifier la présence dans la liste ou non
+ * 
+ * @return Boolean Renvoie si oui ou non l'ID est présent dans la liste de personnes.
+ * 
+ */
 function testPInListeG($Liste,$id)
 {
   foreach ($Liste as $g)
   {
-    if ($g->getNumGroupe() == $id)
+    if ($g->getNumGroupe() === $id)
     {
       return true;
     }
@@ -114,8 +191,25 @@ function testPInListeG($Liste,$id)
   return false;
 }
 
+/**
+ * Cette fonction traite le fichier en format CSV
+ * passé en paramètre pour ensuite insérer les 
+ * données qu'il contient dans la base de données,
+ * dans le cas présent des jurys.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * @param String $filename Chemin pour accèder au fichier CSV
+ */
 function getCSVforJury($connexion,$filename)
 {
+    /**
+     * 
+     * @var Pointeur $handle Pointeur vers le fichier à traiter.
+     * @var Array $tabJury Liste des jurys à insérer dans la base de données.
+     * @var Integer $id ID maximum d'un groupe dans la base de données
+     */
     try{
         $handle = fopen($filename,"r");
         $tabJury = array();
@@ -145,11 +239,23 @@ function getCSVforJury($connexion,$filename)
     }
 }
 
+/**
+ * Cette fonction si l'ID passé en paramètre est présent
+ * dans la liste passée, elle aussi, en paramètre.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param Array $Liste Liste contenant des jurys
+ * @param Integer $id ID dont il faut vérifier la présence dans la liste ou non
+ * 
+ * @return Boolean Renvoie si oui ou non l'ID est présent dans la liste de jurys.
+ * 
+ */
 function testPInListeJ($Liste,$id)
 {
   foreach ($Liste as $g)
   {
-    if ($g->getNumJury() == $id)
+    if ($g->getNumJury() === $id)
     {
       return true;
     }
@@ -157,8 +263,27 @@ function testPInListeJ($Liste,$id)
   return false;
 }
 
+/**
+ * Cette fonction traite le fichier en format CSV
+ * passé en paramètre pour ensuite insérer les 
+ * données qu'il contient dans la base de données,
+ * dans le cas présent des créneaux horaires et des
+ * instances de la table DONNE.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param PDO $connexion Connexion avec la base de données.
+ * @param String $filename Chemin pour accèder au fichier CSV
+ */
 function getCSVforHeure($connexion,$filename)
 {
+    /**
+     * 
+     * @var Pointeur $handle Pointeur vers le fichier à traiter.
+     * @var Array $tabHeure Liste des créneaux horaires à insérer dans la base de données.
+     * @var Array $tabJuge Liste des instances de la table juge à insérer dans la base de données.
+     * @var Integer $id ID maximum d'un groupe dans la base de données
+     */
     $handle = fopen($filename,"r");
     $tabHeure = array();
     $tabJuge = array();
@@ -193,11 +318,23 @@ function getCSVforHeure($connexion,$filename)
     fclose($handle);
 }
 
+/**
+ * Cette fonction si l'heure passée en paramètre est présent
+ * dans la liste passée, elle aussi, en paramètre.
+ * 
+ * @author Quentin Bouny
+ * 
+ * @param Array $Liste Liste contenant des créneaux horaires
+ * @param Heure $heure Heure dont il faut vérifier la présence dans la liste ou non
+ * 
+ * @return Boolean Renvoie si oui ou non l'heure est présent dans la liste de créneaux horaires.
+ * 
+ */
 function testPInListeH($Liste,$heure)
 {
   foreach ($Liste as $h)
   {
-    if ( ($h->getID() == $heure->getID()) || ($h->getDeb() == $heure->getDeb()) || ($h->getFin() == $heure->getFin()) )
+    if ( ($h->getID() === $heure->getID()) || ($h->getDeb() === $heure->getDeb()) || ($h->getFin() === $heure->getFin()) )
     {
       return $h->getID();
     }

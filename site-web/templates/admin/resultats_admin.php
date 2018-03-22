@@ -15,7 +15,6 @@
     include 'menu_admin.php';
     include '../../../BD/Interactions/InteractionsBD.php';
     include '../../../BD/Interactions/Connexion.php';
-
     $db = connect_database();
   ?>
 
@@ -47,11 +46,9 @@
           $stmt->execute();
           $stmt2 = $db->prepare("SELECT idGroupe, idRecompense FROM RECOMPENSE");
           $stmt2->execute();
-
           while($row = $stmt2->fetch()){
             $all_recompense[$row["idRecompense"]] = $row["idGroupe"];
           }
-
           $rec0 = 0;
           $rec1 = 0;
           $rec2 = 0;
@@ -59,7 +56,6 @@
           $rec4 = 0;
           $rec5 = 0;
           $rec6 = 0;
-
           while($row = $stmt->fetch()){
             array_push($all_grp,$row['NumGroupe']);
             $liste = getNote($db,$row['NumGroupe']);
@@ -67,7 +63,6 @@
             echo "<td>".$row['NumGroupe']."</td>";
             echo "<td>".$row['NomProjet']."</td>";
             echo "<td>".$row['Lycee']."</td>";
-
             //echo $liste['Originalite'];
             if($liste['Originalite']==-1){
               $rec0+=1;
@@ -78,7 +73,6 @@
                 echo "<td bgcolor='#FFE469'>". "/" ."</td>";
               }
             }
-
             if($liste['Prototype']==-1){
               $rec1+=1;
               if ($rec1 != $all_recompense["2"]){
@@ -88,7 +82,6 @@
                 echo "<td bgcolor='#FFE469'>". "/" ."</td>";
               }
             }
-
             if($liste['DemarcheSI']==-1){
               $rec2+=1;
               if ($rec2 != $all_recompense["3"]){
@@ -98,7 +91,6 @@
                 echo "<td bgcolor='#FFE469'>". "/" ."</td>";
               }
             }
-
             if($liste['pluriDisciplinarite']==-1){
               $rec3+=1;
               if ($rec3 != $all_recompense["4"]){
@@ -108,7 +100,6 @@
                 echo "<td bgcolor='#FFE469'>". "/" ."</td>";
               }
             }
-
             if($liste['Maitrise']==-1){
               $rec4+=1;
               if ($rec4 != $all_recompense["5"]){
@@ -118,7 +109,6 @@
                 echo "<td bgcolor='#FFE469'>". "/" ."</td>";
               }
             }
-
             if($liste['devDurable']==-1){
               $rec5+=1;
               if ($rec5 != $all_recompense["6"]){
@@ -128,7 +118,6 @@
                 echo "<td bgcolor='#FFE469'>". "/" ."</td>";
               }
             }
-
             if($liste['Originalite']==-1 OR $liste['Prototype']==-1 OR $liste['DemarcheSI']==-1 OR $liste['pluriDisciplinarite']==-1 OR $liste['Maitrise']==-1 OR $liste['devDurable']==-1){
               $rec6+=1;
               if ($rec6 != $all_recompense["7"]){
@@ -138,7 +127,6 @@
                 echo "<td bgcolor='#FFE469'>". "/" ."</td>";
               }
             }
-
             else{
               $rec0+=1;
               if ($rec0 != $all_recompense["1"]){
@@ -147,7 +135,6 @@
               else{
                 echo "<td bgcolor='#FFE469'>".$liste['Originalite']."</td>";
               }
-
               $rec1+=1;
               if ($rec1 != $all_recompense["2"]){
                 echo "<td>".$liste['Prototype']."</td>";
@@ -155,7 +142,6 @@
               else{
                 echo "<td bgcolor='#FFE469'>".$liste['Prototype']."</td>";
               }
-
               $rec2+=1;
               if ($rec2 != $all_recompense["3"]){
                 echo "<td>".$liste['DemarcheSI']."</td>";
@@ -163,7 +149,6 @@
               else{
                 echo "<td bgcolor='#FFE469'>".$liste['DemarcheSI']."</td>";
               }
-
               $rec3+=1;
               if ($rec3 != $all_recompense["4"]){
                 echo "<td>".$liste['pluriDisciplinarite']."</td>";
@@ -171,7 +156,6 @@
               else{
                 echo "<td bgcolor='#FFE469'>".$liste['pluriDisciplinarite']."</td>";
               }
-
               $rec4+=1;
               if ($rec4 != $all_recompense["5"]){
                 echo "<td>".$liste['Maitrise']."</td>";
@@ -179,7 +163,6 @@
               else{
                 echo "<td bgcolor='#FFE469'>".$liste['Maitrise']."</td>";
               }
-
               $rec5+=1;
               if ($rec5 != $all_recompense["6"]){
                 echo "<td>".$liste['devDurable']."</td>";
@@ -187,7 +170,6 @@
               else{
                 echo "<td bgcolor='#FFE469'>".$liste['devDurable']."</td>";
               }
-
               $rec6+=1;
               if ($rec6 != $all_recompense["7"]){
                 echo "<td>".round(($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/6, 2) ."</td>";
@@ -196,7 +178,6 @@
                 echo "<td bgcolor='#FFE469'>".round(($liste['Originalite'] + $liste['Prototype'] + $liste['DemarcheSI'] + $liste['pluriDisciplinarite'] + $liste['Maitrise'] + $liste['devDurable'])/6, 2) ."</td>";
               }
             }
-
             echo "</tr>";
           }
         }

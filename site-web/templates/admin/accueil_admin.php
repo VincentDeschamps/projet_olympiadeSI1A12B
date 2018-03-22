@@ -86,7 +86,6 @@ document.getElementById("date").textContent = elemdate[2]+"-"+elemdate[1]+"-"+el
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
->>>>>>> ludoliv/master
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";

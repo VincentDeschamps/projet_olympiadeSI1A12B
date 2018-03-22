@@ -1,6 +1,24 @@
 <?php
+
+    /**
+     * Cette fonction récupère l'indice maximum 
+     * pour la table PERSONNE dans la base de données.
+     * 
+     * 
+     * @author Bouny Quentin
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * 
+     * @return int Retourne l'ID maximum de la table PERSONNE dans la base de données. 
+     */
     function getMaxIDPersonne($connexion)
     {
+        /**
+         * 
+         * @var String $request Requête à envoyer à la base de données.
+         * @var PDOStatement $result Résultat de la requête en base de données.
+         * @var Integer $max['max(ID)'] Contient l'ID maximum qu'il y a dans la base de données. 
+         */
         // Writing the request
         $request = "SELECT max(ID) from PERSONNE";
 
@@ -18,9 +36,25 @@
             return 0;
         }
     }
-
+    /**
+     * Cette fonction récupère l'indice maximum 
+     * pour la table GROUPE dans la base de données.
+     * 
+     * 
+     * @author Bouny Quentin
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * 
+     * @return int Retourne l'ID maximum de la table GROUPE dans la base de données. 
+     */
     function getMaxIDGROUPE($connexion)
     {
+        /**
+         * 
+         * @var String $request Requête à envoyer à la base de données.
+         * @var PDOStatement $result Résultat de la requête en base de données.
+         * @var Integer $max['max(ID)'] Contient l'ID maximum qu'il y a dans la base de données. 
+         */
         // Writing the request
         $request = "SELECT max(NumGroupe) from GROUPE";
 
@@ -39,8 +73,25 @@
         }
     }
 
+    /**
+     * Cette fonction récupère l'indice maximum 
+     * pour la table JURY dans la base de données.
+     * 
+     * 
+     * @author Bouny Quentin
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * 
+     * @return int Retourne l'ID maximum de la table JURY dans la base de données. 
+     */
     function getMaxIDJURY($connexion)
     {
+        /**
+         * 
+         * @var String $request Requête à envoyer à la base de données.
+         * @var PDOStatement $result Résultat de la requête en base de données.
+         * @var Integer $max['max(ID)'] Contient l'ID maximum qu'il y a dans la base de données. 
+         */
         // Writing the request
         $request = "SELECT max(NumJury) from JURY";
 
@@ -59,8 +110,25 @@
         }
     }
 
+    /**
+     * Cette fonction récupère l'indice maximum 
+     * pour la table HEURE dans la base de données.
+     * 
+     * 
+     * @author Bouny Quentin
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * 
+     * @return int Retourne l'ID maximum de la table HEURE dans la base de données. 
+     */
     function getMaxIDHeure($connexion)
     {
+        /**
+         * 
+         * @var String $request Requête à envoyer à la base de données.
+         * @var PDOStatement $result Résultat de la requête en base de données.
+         * @var Integer $max['max(ID)'] Contient l'ID maximum qu'il y a dans la base de données. 
+         */
         // Writing the request
         $request = "SELECT max(IDHeure) as max from HEURE";
 
@@ -79,8 +147,26 @@
         }
     }
 
+    /**
+     * Cette fonction récupère l'indice maximum 
+     * pour la table NOTE dans la base de données.
+     * 
+     * 
+     * @author Bouny Quentin
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * 
+     * @return int Retourne l'ID maximum de la table NOTE dans la base de données. 
+     */
     function getMaxIDNote($connexion)
     {
+        /**
+         * 
+         * @var String $request Requête à envoyer à la base de données.
+         * @var PDOStatement $result Résultat de la requête en base de données.
+         * @var Integer $max['max(ID)'] Contient l'ID maximum qu'il y a dans la base de données. 
+         */
+
         // Writing the request
         $request = "SELECT max(idNote) as max from NOTE";
 
@@ -99,9 +185,23 @@
         }
     }
 
-
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste de personnes passée en paramètre
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListePersonne Liste des personnes à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertPersonne($connexion,$ListePersonne)
     {
+        /**
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
+         */
         try{
             // Creation of the statement
             $statement = $connexion->prepare("INSERT INTO PERSONNE (ID,Nom,Prenom) VALUES (:id,:Nom, :Prenom)");
@@ -130,8 +230,23 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste d'élèves passée en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListeEleve Liste des élèves à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertEleve($connexion,$ListeEleve)
     {
+        /**
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
+         */
         try{
 
             $statement = $connexion->prepare("INSERT INTO ELEVE (IDEleve,Filiere,NumGroupe) VALUES (:id,:filiere, :Num)");
@@ -157,8 +272,23 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste de professeurs passée en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListeProf Liste des professeurs à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertProf($connexion,$ListeProf)
     {
+        /**
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
+         */
         try{
 
             $statement = $connexion->prepare("INSERT INTO PROFESSEUR (IDProf,NumJury) VALUES (:id,:Num)");
@@ -182,16 +312,22 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste de groupes passée en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListeGroupe Liste des groupes à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertGroupe($connexion,$ListeGroupe)
     {
         /**
-         * This function is inserting the groups
-         * in the database
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
-         * @param array $ListeGroupe list of the groups that need to be inserted
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
          */
         try{
 
@@ -222,16 +358,22 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste de jury passée en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListeJury Liste des jury à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertJury($connexion,$ListeJury)
     {
         /**
-         * This function is inserting the jury
-         * in the database
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
-         * @param array $ListeJury list of the jury that need to be inserted
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
          */
         try{
 
@@ -258,16 +400,22 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste des créneaux horaires passée en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListeHeure Liste des créneaux horaires à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertHeure($connexion,$ListeHeure)
     {
         /**
-         * This function is inserting the Heure
-         * in the database
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
-         * @param array $ListeHeure list of the Heure that need to be inserted
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
          */
         try{
 
@@ -294,16 +442,22 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste des juges passée en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListeJuge Liste des juges à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertJuge($connexion,$ListeJuge)
     {
         /**
-         * This function is inserting the Juge values
-         * in the database
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
-         * @param array $ListeHeure list of the Heure that need to be inserted
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
          */
         try{
 
@@ -332,16 +486,22 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une
+     * liste de notes passée en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListeNote Liste des notes à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertNote($connexion,$ListeNote)
     {
         /**
-         * This function is inserting the Juge values
-         * in the database
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
-         * @param array $ListeHeure list of the Heure that need to be inserted
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
          */
         try{
 
@@ -375,16 +535,23 @@
         }
     }
 
+    /**
+     * Cette fonction insère, dans la base de données, une 
+     * liste de relations entre la table JURY, GROUPE et NOTE
+     * passée en paramètres.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param Array $ListePersonne Liste des personnes à insérer dans la base de données.
+     * données.
+     *
+     */
     function insertDonne($connexion,$ListeDonne)
     {
         /**
-         * This function is inserting the Juge values
-         * in the database
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
-         * @param array $ListeHeure list of the Heure that need to be inserted
+         * 
+         * @var PDOStatement $statement Variable dans laquelle est stockée les résulats de la requête dans la base de données.
          */
         try{
 
@@ -411,18 +578,22 @@
         }
     }
 
-
-
+    /**
+     * Cette fonction permet de récupèrer la liste
+     * des personnes appartenant à un groupe donné.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données.
+     * @param Integer $idGroupe ID du groupe dont on veut récupérer la liste de personnes appartenant à ce groupe.
+     * 
+     * @return Array Liste des personnes appartenant au groupe dont l'ID est passé en paramètre.
+     */
     function getPersonneFromGroupe($connexion,$idGroupe)
     {
         /**
-         * This function is getting the Personne that are in
-         * the groupe specified with the parameter $idGroupe
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
-         * @param int $idGroupe id of the groupe we're searching members
+         * @var String $prep Requête à envoyer à la base de données.
+         * @var PDOStatement $reponse Résultat de la requête en base de données.
          */
         try{
             $prep = "SELECT ID, Nom, Prenom from PERSONNE NATURAL JOIN ELEVE where IDEleve = ID and NumGroupe=$idGroupe;";
@@ -449,15 +620,21 @@
         }
     }
 
+    /**
+     * Cette fonction permet de récupèrer la liste
+     * des élèves dans la base de données.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données.
+     * 
+     * @return Array Liste des eleves dans la base de données.
+     */
     function getEleve($connexion)
     {
         /**
-         * This function is getting the Personne that are in
-         * the ELEVE table
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
+         * @var String $prep Requête à envoyer à la base de données.
+         * @var PDOStatement $reponse Résultat de la requête en base de données.
          */
         try{
             $prep = "SELECT * from PERSONNE where ID=(SELECT IDEleve from ELEVE where IDEleve=ID);";
@@ -482,13 +659,25 @@
         }
     }
 
+    /**
+     * Cette fonction permet de récupèrer la liste
+     * des notes appartenant au groupe dont l'ID 
+     * est passé en paramètre.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données.
+     * @param Integer $numGroupe Numéro du groupe dont on veut récupérer les notes.
+     * 
+     * @return Array Liste de la moyenne des notes du groupe pour chaque catégorie ou liste avec chaque critère
+     * équivalent à -1 si aucune note dans la base de données pour ce groupe.
+     */
     function getNote($connexion,$numGroupe)
     {
         /**
-         * @author Quentin Bouny
-         *
-         * @param PDO:$connexion link with the Database
-         * @param int:$numGroupe number of the group we want to get the notes
+         * 
+         * @var String $prep Requête à envoyer en base de données.
+         * @var PDOStatement $reponse Réponse de la base de données à la requête qui lui est envoyée.
          */
         try
         {
@@ -496,6 +685,13 @@
 
             $prep = "select idNote from DONNE where NumGroupe = $numGroupe";
             $reponse = $connexion->query($prep);
+
+            $NB = $reponse->rowCount();
+
+            if ($NB == 0)
+            {
+                return array("Prototype"=>-1,"Originalite"=>-1,"DemarcheSI"=>-1,"pluriDisciplinarite"=>-1,"Maitrise"=>-1,"devDurable"=>-1);
+            }
 
             while ($donnees = $reponse->fetch())
             {
@@ -512,22 +708,14 @@
                 $Liste["Maitrise"] += $rep['MaitriseScientifique'];
                 $Liste["devDurable"] += $rep['Communication'];
             }
-            $NB = $reponse->rowCount();
 
-            if ($NB == 0)
-            {
-                return array("Prototype"=>-1,"Originalite"=>-1,"DemarcheSI"=>-1,"pluriDisciplinarite"=>-1,"Maitrise"=>-1,"devDurable"=>-1);
-            }
-            else
-            {
-                $Liste["Prototype"] = $Liste["Prototype"] / $NB;
-                $Liste["Originalite"] = $Liste["Originalite"]/$NB;
-                $Liste["DemarcheSI"] = $Liste["DemarcheSI"]/$NB;
-                $Liste["pluriDisciplinarite"] = $Liste["pluriDisciplinarite"]/$NB;
-                $Liste["Maitrise"] = $Liste["Maitrise"]/$NB;
-                $Liste["devDurable"] = $Liste["devDurable"]/$NB;
+            $Liste["Prototype"] = $Liste["Prototype"] / $NB;
+            $Liste["Originalite"] = $Liste["Originalite"]/$NB;
+            $Liste["DemarcheSI"] = $Liste["DemarcheSI"]/$NB;
+            $Liste["pluriDisciplinarite"] = $Liste["pluriDisciplinarite"]/$NB;
+            $Liste["Maitrise"] = $Liste["Maitrise"]/$NB;
+            $Liste["devDurable"] = $Liste["devDurable"]/$NB;
 
-            }
 
             return $Liste;
         }
@@ -537,15 +725,24 @@
         }
     }
 
+    /**
+     * Cette fonction vérifie si le login et le mot de passe passé en paramètre
+     * sont dans la base de données et donc valides.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données
+     * @param String $Login Login a tester
+     * @param String $password Mot de passe a tester
+     * 
+     */
     function checkLogin($connexion,$Login,$password)
     {
         /**
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion Link to the database
-         * @param String $Login the login that need to be checked
-         * @param String $password the password that need to be checked
-         *
+         * 
+         * @var String $prep Requête à envoyer en base de données
+         * @var String $prep1 Requête à envoyer en base de données
+         * @var PDOStatement $rep Réponse de la base de données.
          */
         try
         {
@@ -578,15 +775,22 @@
         }
     }
 
+    /**
+     * Cette fonction permet de récupèrer la liste
+     * des professeurs dans la base de données.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données.
+     * 
+     * @return Array Liste des professeurs dans la base de données.
+     */
     function getProf($connexion)
     {
         /**
-         * This function is getting the Personne that are in
-         * the PROFESSEUR table
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
+         * 
+         * @var String $prep Requête à envoyer en base de données.
+         * @var PDOStatement $reponse Réponse de la base de données à la requête qui lui est envoyée.
          */
         try{
             $prep = "SELECT * from PERSONNE where ID=(SELECT IDProf from PROFESSEUR where IDProf=ID);";
@@ -611,15 +815,22 @@
         }
     }
 
+    /**
+     * Cette fonction permet de récupèrer la liste
+     * des créneaux horaires dans la base de données.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données.
+     * 
+     * @return Array Liste des créneaux horaires dans la base de données.
+     */
     function getHeure($connexion)
     {
-       /**
-         * This function is getting the heure that are in
-         * the HEURE table
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
+        /**
+         * 
+         * @var String $prep Requête à envoyer en base de données.
+         * @var PDOStatement $reponse Réponse de la base de données à la requête qui lui est envoyée.
          */
         try{
             $prep = "SELECT * from HEURE;";
@@ -644,15 +855,22 @@
         }
     }
 
+    /**
+     * Cette fonction permet de récupèrer la liste
+     * des groupes dans la base de données.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données.
+     * 
+     * @return Array Liste des groupes dans la base de données.
+     */
     function getGroupe($connexion)
     {
-       /**
-         * This function is getting the groups that are in
-         * the GROUPE table
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
+        /**
+         * 
+         * @var String $prep Requête à envoyer en base de données.
+         * @var PDOStatement $reponse Réponse de la base de données à la requête qui lui est envoyée.
          */
         try{
             $prep = "SELECT * from GROUPE where NumGroupe > 0;";
@@ -678,15 +896,22 @@
         }
     }
 
+    /**
+     * Cette fonction permet de récupèrer la liste
+     * des jurys dans la base de données.
+     * 
+     * @author Quentin Bouny
+     * 
+     * @param PDO $connexion Connexion avec la base de données.
+     * 
+     * @return Array Liste des jurys dans la base de données.
+     */
     function getJury($connexion)
     {
-       /**
-         * This function is getting the jurys that are in
-         * the JURY table
-         *
-         * @author Quentin Bouny
-         *
-         * @param PDO $connexion link with the Database
+        /**
+         * 
+         * @var String $prep Requête à envoyer en base de données.
+         * @var PDOStatement $reponse Réponse de la base de données à la requête qui lui est envoyée.
          */
         try{
             $prep = "SELECT * from JURY;";
